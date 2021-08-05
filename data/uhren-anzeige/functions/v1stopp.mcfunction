@@ -7,8 +7,8 @@ execute at @e[type=minecraft:armor_stand,tag=EtiUhrA.1Alle] run fill ~-1 ~ ~-1 ~
 execute at @e[type=minecraft:armor_stand,tag=EtiUhrA.1Alle] run fill ~-1 ~ ~-1 ~1 ~2 ~1 minecraft:air replace minecraft:quartz_slab
 
 # Alle Spieler bekommen den Rüstungsständer aus dem Inventar entfernt
-clear @a minecraft:armor_stand{uhren-anzeige:"v1gegenstand"}
+clear @a minecraft:armor_stand{EigUhrA.1Alle:true}
 
 # Rüstungsständer die gedroppt wurden erhalten ein Etikett und alle Objekte mit dem Etikett werden entfernt.
-tag @e[type=minecraft:item,nbt={Item:{tag:{uhren-anzeige:"v1gegenstand"} } }] add EtiUhrA.1Alle
+tag @e[type=minecraft:item,nbt={Item:{tag:{EigUhrA.1Alle:true} } }] add EtiUhrA.1Alle
 kill @e[tag=EtiUhrA.1Alle]
