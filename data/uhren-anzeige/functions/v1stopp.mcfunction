@@ -1,10 +1,10 @@
-# Das Punktestand-Ziel wird gelöscht.
-scoreboard objectives remove PZUhrA.1Zeichen
+# Das Punkte-Ziel wird gelöscht.
+scoreboard objectives remove PZUhrA.1Ziffer
 
 # An der Position aller Ziffern wird der Bereich durch Luft ersetzt.
-execute at @e[type=minecraft:armor_stand,tag=EtiUhrA.1Alle] run fill ~-1 ~ ~-1 ~1 ~2 ~1 minecraft:air replace minecraft:quartz_block
-execute at @e[type=minecraft:armor_stand,tag=EtiUhrA.1Alle] run fill ~-1 ~ ~-1 ~1 ~2 ~1 minecraft:air replace minecraft:quartz_stairs
-execute at @e[type=minecraft:armor_stand,tag=EtiUhrA.1Alle] run fill ~-1 ~ ~-1 ~1 ~2 ~1 minecraft:air replace minecraft:quartz_slab
+execute at @e[type=minecraft:marker,tag=EtiUhrA.1Alle] run fill ~-1 ~ ~-1 ~1 ~2 ~1 minecraft:air replace minecraft:quartz_block
+execute at @e[type=minecraft:marker,tag=EtiUhrA.1Alle] run fill ~-1 ~ ~-1 ~1 ~2 ~1 minecraft:air replace minecraft:quartz_stairs
+execute at @e[type=minecraft:marker,tag=EtiUhrA.1Alle] run fill ~-1 ~ ~-1 ~1 ~2 ~1 minecraft:air replace minecraft:quartz_slab
 
 # Alle Spieler bekommen den Rüstungsständer aus dem Inventar entfernt
 clear @a minecraft:armor_stand{EigUhrA.1Alle:true}
