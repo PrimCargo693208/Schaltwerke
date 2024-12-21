@@ -1,32 +1,16 @@
-# Die Tick-Variable wird wieder auf null gesetzt.
-scoreboard players set #VarUhrA.1Tick PZUhrA.1Ziffer 0
+# Abhängig um welchen Ziffern-Marker es sich hierbei handelt (Etikett) werden die Stunden, Minuten oder Sekunden als Argumente in den jeweiligen Befehl übergeben.
+$execute if entity @s[tag=EtiUhrAnz.1Stunden] run scoreboard players set VarUhrAnz.1Ziffer PZUhrAnz.1Wert $(Stunden)
+$execute if entity @s[tag=EtiUhrAnz.1Minuten] run scoreboard players set VarUhrAnz.1Ziffer PZUhrAnz.1Wert $(Minuten)
+$execute if entity @s[tag=EtiUhrAnz.1Sekunden] run scoreboard players set VarUhrAnz.1Ziffer PZUhrAnz.1Wert $(Sekunden)
 
-# Jede Sekunde wird der Wert des Sekunden-Rüstungsständers erhöht und wenn er den Wert zehn erreicht hat, wird er auf null zurückgesetzt und der Erfolg von diesem Befehl wird in eine Erfolgs-Variable gespeichert.
-scoreboard players add @e[type=minecraft:marker,tag=EtiUhrA.1Sekunden] PZUhrA.1Ziffer 1
-execute store success score #VarUhrA.1Erfolg PZUhrA.1Ziffer run scoreboard players set @e[type=minecraft:marker,tag=EtiUhrA.1Sekunden,scores={PZUhrA.1Ziffer=10..}] PZUhrA.1Ziffer 0
+# Um von einer Zahl nur die Zehner-Stelle zu erhalten wird geteilt durch zehn gerechnet.
+execute if entity @s[tag=EtiUhrAnz.1Zehner] run scoreboard players operation VarUhrAnz.1Ziffer PZUhrAnz.1Wert /= KonstUhrAnz.1ZEHN PZUhrAnz.1Wert
 
-# Wenn die Sekunde den Wert erreicht, wird die Zehner-Sekunden-Ziffer um eins erhöht. Gleichzeitig wird der Wert der Zehner-Sekunde wieder auf null gesetzt, wenn er den Wert sechs besitzt. Davon wird der Erfolg des Befehls in die gleichnamige Variable gespeichert.
-execute if score #VarUhrA.1Erfolg PZUhrA.1Ziffer matches 1 run scoreboard players add @e[type=minecraft:marker,tag=EtiUhrA.1SekundenZehner] PZUhrA.1Ziffer 1
-execute if score #VarUhrA.1Erfolg PZUhrA.1Ziffer matches 1 store success score #VarUhrA.1Erfolg PZUhrA.1Ziffer run scoreboard players set @e[type=minecraft:marker,tag=EtiUhrA.1SekundenZehner,scores={PZUhrA.1Ziffer=6..}] PZUhrA.1Ziffer 0
+# Um von einer Zahl nur die Einer-Stelle zu erhalten wird modulo zehn gerechnet.
+execute if entity @s[tag=!EtiUhrAnz.1Zehner] run scoreboard players operation VarUhrAnz.1Ziffer PZUhrAnz.1Wert %= KonstUhrAnz.1ZEHN PZUhrAnz.1Wert
 
-# Wenn 60 Sekunden erreicht sind, wird die Minute um eins erhöht. Direkt im Anschluss wird die Minute wieder auf null gesetzt, wenn sie den Wert zehn erreicht hat. Davon wird der Erfolg wieder in die Erfolgs-Variable gespeichert.
-execute if score #VarUhrA.1Erfolg PZUhrA.1Ziffer matches 1 run scoreboard players add @e[type=minecraft:marker,tag=EtiUhrA.1Minuten] PZUhrA.1Ziffer 1
-execute if score #VarUhrA.1Erfolg PZUhrA.1Ziffer matches 1 store success score #VarUhrA.1Erfolg PZUhrA.1Ziffer run scoreboard players set @e[type=minecraft:marker,tag=EtiUhrA.1Minuten,scores={PZUhrA.1Ziffer=10..}] PZUhrA.1Ziffer 0
+# Die ausgerechnete Ziffer wird in den Datenspeicher geschrieben.
+execute store result storage uhren-anzeige:v1daten "EigUhrAnz.1Argumente".Ziffer int 1 run scoreboard players get VarUhrAnz.1Ziffer PZUhrAnz.1Wert
 
-# Wenn zehn Minuten erreicht sind, wird die Zehner-Minute um eins erhöht und wenn sie den Wert sechs erreicht wird sie wieder auf null gesetzt und das ganze wird in der Erfolgs-Variable gespeichert.
-execute if score #VarUhrA.1Erfolg PZUhrA.1Ziffer matches 1 run scoreboard players add @e[type=minecraft:marker,tag=EtiUhrA.1MinutenZehner] PZUhrA.1Ziffer 1
-execute if score #VarUhrA.1Erfolg PZUhrA.1Ziffer matches 1 store success score #VarUhrA.1Erfolg PZUhrA.1Ziffer run scoreboard players set @e[type=minecraft:marker,tag=EtiUhrA.1MinutenZehner,scores={PZUhrA.1Ziffer=6..}] PZUhrA.1Ziffer 0
-
-# Wenn 60 Minuten erreicht sind, wird die Stunde um eins erhöht und wenn sie den Wert zehn erriecht wird sie auf null zurück gesetzt. Der Erfolg davon wird gespeichert.
-execute if score #VarUhrA.1Erfolg PZUhrA.1Ziffer matches 1 run scoreboard players add @e[type=minecraft:marker,tag=EtiUhrA.1Stunden] PZUhrA.1Ziffer 1
-execute if score #VarUhrA.1Erfolg PZUhrA.1Ziffer matches 1 store success score #VarUhrA.1Erfolg PZUhrA.1Ziffer run scoreboard players set @e[type=minecraft:marker,tag=EtiUhrA.1Stunden,scores={PZUhrA.1Ziffer=10..}] PZUhrA.1Ziffer 0
-
-# Wenn zehn Stunden erreicht sind wird die Zehner-Stunde um eins erhöht. Darunter wird geprüft ob zwei Zehner-Stunden und vier Stunden erreicht worden sind. Wenn das der Fall ist, werden beide auf null zurück und dies wird wieder in der Erfolgs-Variable gespeichert.
-execute if score #VarUhrA.1Erfolg PZUhrA.1Ziffer matches 1 run scoreboard players add @e[type=minecraft:marker,tag=EtiUhrA.1StundenZehner] PZUhrA.1Ziffer 1
-execute store success score #VarUhrA.1Erfolg PZUhrA.1Ziffer store result score @e[type=minecraft:marker,tag=EtiUhrA.1Stunden,scores={PZUhrA.1Ziffer=4..}] PZUhrA.1Ziffer run scoreboard players set @e[type=minecraft:marker,tag=EtiUhrA.1StundenZehner,scores={PZUhrA.1Ziffer=2..}] PZUhrA.1Ziffer 0
-
-# Wenn 24 Stunden erreicht wurden, werden Sekunden und Minuten auf null zurück gesetzt.
-execute if score #VarUhrA.1Erfolg PZUhrA.1Ziffer matches 1 run scoreboard players set @e[type=minecraft:marker,tag=EtiUhrA.1Sekunden] PZUhrA.1Ziffer 0
-execute if score #VarUhrA.1Erfolg PZUhrA.1Ziffer matches 1 run scoreboard players set @e[type=minecraft:marker,tag=EtiUhrA.1SekundenZehner] PZUhrA.1Ziffer 0
-execute if score #VarUhrA.1Erfolg PZUhrA.1Ziffer matches 1 run scoreboard players set @e[type=minecraft:marker,tag=EtiUhrA.1Minuten] PZUhrA.1Ziffer 0
-execute if score #VarUhrA.1Erfolg PZUhrA.1Ziffer matches 1 run scoreboard players set @e[type=minecraft:marker,tag=EtiUhrA.1MinutenZehner] PZUhrA.1Ziffer 0
+# Die Ziffern-Funktion wird mit dem Datenspeicher-Argumenten aufgerufen.
+function uhren-anzeige:v1ziffer with storage uhren-anzeige:v1daten "EigUhrAnz.1Argumente"
