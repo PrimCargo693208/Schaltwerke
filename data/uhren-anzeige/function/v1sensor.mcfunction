@@ -1,5 +1,5 @@
 # Aus dem stationären Wiederhol-Befehlsblock wird die Uhrzeit ausgelesen und in den Datenspeicher geschrieben.
-execute at @e[type=minecraft:marker,tag=EtiUhrAnz.1Sensor,sort=nearest,limit=1] run data modify storage uhren-anzeige:v1daten "EigUhrAnz.1Uhrzeit" set string block ~ ~ ~ LastOutput 10 18
+execute at @n[type=minecraft:marker,tag=EtiUhrAnz.1Sensor] run data modify storage uhren-anzeige:v1daten "EigUhrAnz.1Uhrzeit" set string block ~ ~ ~ LastOutput 10 18
 
 # Die Uhrzeit wird in separate Stunden-, Minuten- und Sekunden-Eigenschaften gespeichert um sie später in der Argument-Funktion verwenden zu können.
 data modify storage uhren-anzeige:v1daten "EigUhrAnz.1Argumente".Stunden set string storage uhren-anzeige:v1daten "EigUhrAnz.1Uhrzeit" 0 2

@@ -13,7 +13,7 @@ execute at @e[type=minecraft:marker,tag=EtiUhrAnz.1Alle] run fill ~-1 ~ ~-1 ~1 ~
 # Alle Spieler bekommen den Rüstungsständer aus dem Inventar entfernt
 clear @a minecraft:armor_stand[minecraft:custom_data~{EigUhrAnz.1Alle:true}]
 
-# Rüstungsständer die gedroppt wurden alle Objekte mit dem Etikett werden entfernt.
+# Rüstungsständer die gedroppt wurden und alle Objekte mit dem Etikett werden entfernt.
 execute as @e[type=minecraft:item] if items entity @s contents *[minecraft:custom_data~{EigUhrAnz.1Alle:true}] run kill @s
 kill @e[tag=EtiUhrAnz.1Alle]
 
