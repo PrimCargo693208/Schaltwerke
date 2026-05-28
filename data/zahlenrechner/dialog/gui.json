@@ -1,0 +1,77 @@
+{
+    "type": "minecraft:multi_action",
+    "title": "Rechner",
+    "external_title": "Zahlenrechner öffnen",
+    "can_close_with_escape": true,
+    "body": [
+        {
+            "type": "minecraft:plain_message",
+            "contents": "Gebe zwei Zahlen ein und wähle einen Operator aus. Drück zum ausrechnen auf den Knopf unten."
+        }
+    ],
+    "inputs": [
+        {
+            "type": "minecraft:text",
+            "key": "zahl1",
+            "label": "Erste Zahl:",
+            "label_visible": true,
+            "initial": "0",
+            "width": 150
+        },
+        {
+            "type": "minecraft:single_option",
+            "key": "operator",
+            "label": "Operator",
+            "width": 150,
+            "options": [
+                {
+                    "id": "1",
+                    "display": "+ Plus",
+                    "initial": true
+                },
+                {
+                    "id": "2",
+                    "display": "- Minus"
+                },
+                {
+                    "id": "3",
+                    "display": "* Mal"
+                },
+                {
+                    "id": "4",
+                    "display": "/ Geteil"
+                },
+                {
+                    "id": "5",
+                    "display": "% Modulo"
+                },
+                {
+                    "id": "6",
+                    "display": "^ Potenz"
+                },
+                {
+                    "id": "7",
+                    "display": "√ Wurzel ziehen"
+                }
+            ]
+        },
+        {
+            "type": "minecraft:text",
+            "key": "zahl2",
+            "label": "Zweite Zahl:",
+            "label_visible": true,
+            "initial": "0",
+            "width": 150
+        }
+    ],
+    "actions": [
+        {
+            "label": {"text": "Ausrechnen"},
+            "tooltip": "Zahlen ausrechen und im Chat ausgeben",
+            "action": {
+                "type": "minecraft:dynamic/run_command",
+                "template": "function zahlenrechner:v1_ausrechnen {zahl1: $(zahl1), zahl2: $(zahl2), operator: '$(operator)'}"
+            }
+        }
+    ]
+}
