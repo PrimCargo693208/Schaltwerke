@@ -1,3 +1,5 @@
+# Wurzel wird berechnet mit dem Heron-Verfahren: https://de.wikipedia.org/wiki/Heron-Verfahren#Iterationsverfahren
+
 # a2 = a / x
 scoreboard players operation .wurzel_a2 zahlenrechner = .wurzel_a zahlenrechner
 scoreboard players operation .wurzel_a2 zahlenrechner /= .wurzel_x zahlenrechner
