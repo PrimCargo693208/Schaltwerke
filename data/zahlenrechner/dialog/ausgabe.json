@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:multi_action",
+    "title": "Rechner",
+    "external_title": "Zahlenrechner öffnen",
+    "can_close_with_escape": true,
+    "body": [
+        {
+            "type": "minecraft:plain_message",
+            "contents": [
+                "Rechnung: ",
+                {"score": {"name": ".zahl1", "objective": "zahlenrechner"}},
+                {"score": {"name": ".operator", "objective": "zahlenrechner"}},
+                {"score": {"name": ".zahl2", "objective": "zahlenrechner"}},
+                {"text": "="},
+                {"score": {"name": ".ergebnis", "objective": "zahlenrechner"}}
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "label": {"text": "Schließen"}
+        }
+    ]
+}

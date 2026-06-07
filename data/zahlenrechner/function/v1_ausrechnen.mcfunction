@@ -1,6 +1,12 @@
 # Debug:
 $tellraw @s "zahl1: $(zahl1), zahl2: $(zahl2), operator: $(operator)"
 
+# Daten in Scoreboard eintragen
+$scoreboard players set .zahl1 zahlenrechner $(zahl1)
+$scoreboard players set .zahl2 zahlenrechner $(zahl2)
+$scoreboard players set .operator zahlenrechner $(operator)
+scoreboard players set .ergebnis zahlenrechner 0
+
 # == Operatoren ==
 # 1: + Plus"
 # 2: - Minus
@@ -10,4 +16,18 @@ $tellraw @s "zahl1: $(zahl1), zahl2: $(zahl2), operator: $(operator)"
 # 6: ^ Potenz
 # 7: √ Wurzel ziehen
 
-# TODO: Zahlen basierend auf dem Operator ausrechnen
+# Zahlen basierend auf dem Operator ausrechnen
+execute if score .operator zahlenrechner matches 1 run function zahlenrechner:ausrechnen/v1_add
+execute if score .operator zahlenrechner matches 2 run function zahlenrechner:ausrechnen/v1_sub
+execute if score .operator zahlenrechner matches 3 run function zahlenrechner:ausrechnen/v1_mul
+execute if score .operator zahlenrechner matches 4 run function zahlenrechner:ausrechnen/v1_div
+
+
+# Ergebnis ausgeben
+# dialog show @s zahlenrechner:ausgabe
+tellraw @s ["Rechnung: ",\
+           {"score": {"name": ".zahl1", "objective": "zahlenrechner"}}, " ",\
+           {nbt: "operator", storage: "zahlenrechner:daten"}, " ",\
+           {"score": {"name": ".zahl2", "objective": "zahlenrechner"}}, " ",\
+           "= ",\
+           {"score": {"name": ".ergebnis", "objective": "zahlenrechner"}}]
