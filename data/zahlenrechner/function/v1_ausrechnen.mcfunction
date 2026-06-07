@@ -21,7 +21,10 @@ execute if score .operator zahlenrechner matches 1 run function zahlenrechner:au
 execute if score .operator zahlenrechner matches 2 run function zahlenrechner:ausrechnen/v1_sub
 execute if score .operator zahlenrechner matches 3 run function zahlenrechner:ausrechnen/v1_mul
 execute if score .operator zahlenrechner matches 4 run function zahlenrechner:ausrechnen/v1_div
+execute if score .operator zahlenrechner matches 7 run function zahlenrechner:ausrechnen/v1_wurzel
 
+# Falls nötig, dass ergebnis wieder durch 100 teilen und mit 2 Kommastellen anzeigen
+function zahlenrechner:v1_ergebnis_finalisieren
 
 # Ergebnis ausgeben
 # dialog show @s zahlenrechner:ausgabe
@@ -30,4 +33,4 @@ tellraw @s ["Rechnung: ",\
            {nbt: "operator", storage: "zahlenrechner:daten"}, " ",\
            {"score": {"name": ".zahl2", "objective": "zahlenrechner"}}, " ",\
            "= ",\
-           {"score": {"name": ".ergebnis", "objective": "zahlenrechner"}}]
+           {nbt: "ergebnis", storage: "zahlenrechner:daten"}]

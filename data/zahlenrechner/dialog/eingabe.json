@@ -59,7 +59,8 @@
             "key": "zahl2",
             "label": "Zweite Zahl:",
             "label_visible": true,
-            "width": 150
+            "width": 150,
+            "initial": "0"
         }
     ],
     "actions": [
